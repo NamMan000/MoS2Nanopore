@@ -1,4 +1,9 @@
-import streamlit as st
+import streamlit as 
+import hyperspy.api as hs
+import matplotlib.pyplot as plt
+import io
+
+
 st.title("🔬 DM4 Image Processor")
 st.write("Upload a .dm4 file to process and display the image.")
 uploaded_file = st.file_uploader("Choose a DM4 file", type=["dm4"])

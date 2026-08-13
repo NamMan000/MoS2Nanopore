@@ -1,4 +1,4 @@
-import streamlit as 
+import streamlit as st
 import hyperspy.api as hs
 import matplotlib.pyplot as plt
 import io

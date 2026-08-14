@@ -5,6 +5,8 @@ import io
 import tempfile
 import os
 
+from processor import analyze_dm4_image
+
 st.title("🔬 DM4 Image Processor")
 st.write("Upload a .dm4 file to process and display the image.")
 

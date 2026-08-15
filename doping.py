@@ -7,6 +7,11 @@ import numpy as np
 
 def extract_atoms_manual(image, edge_padding):
 
+    image = image.astype(np.float32)  
+    image = filters.gaussian(image, sigma=2.5)
+    image = (image - np.min(image)) / (np.max(image) - np.min(image))  # Scale to [0, 1]
+
+
     #Finds the blobs and returns 3-column array of x,y, and sigma, where sigma represents size of blob
     blobs = blob_log(image, min_sigma=1, max_sigma=3, num_sigma=10, threshold=0.05)    
     inside_mask = (

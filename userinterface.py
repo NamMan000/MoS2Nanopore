@@ -5,13 +5,16 @@ import io
 import tempfile
 import os
 
-from processor import analyze_dm4_image
+from doping import extract_atoms_manual
+from plotting_doping import plot_atoms
 
 st.title("🔬 DM4 Image Processor")
 st.write("Upload a .dm4 file to process and display the image.")
 
 # 1. File Uploader Widget
 uploaded_file = st.file_uploader("Choose a DM4 file", type=["dm4"])
+doping_but = st.button("Tungsten Doping", dopbut1, None, doping_utilites, [image_data,20])
+
 
 if uploaded_file is not None:
     with st.spinner("Processing file..."):
@@ -26,7 +29,7 @@ if uploaded_file is not None:
             # 2. Pass the temporary path string to HyperSpy
             signal = hs.load(tmp_file_path)
             image_data = signal.data
-            
+
             # 3. Create the output plot/image
             fig, ax = plt.subplots()
             ax.imshow(image_data, cmap='gray')

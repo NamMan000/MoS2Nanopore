@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
-def plot_atoms(moly_blobs, tungs_blobs, style = "dot"):  #input needs to be the outputed value from extract_atoms function
+def plot_atoms(moly_blobs, tungs_blobs, image, style = "dot"):  #input needs to be the outputed value from extract_atoms function
     fig, ax = plt.subplots() 
     ax.imshow(image, cmap='gray')
     

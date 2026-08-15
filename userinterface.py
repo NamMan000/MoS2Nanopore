@@ -19,7 +19,7 @@ st.write("Upload a .dm4 file to process and display the image.")
 
 uploaded_file = st.file_uploader(
     "Choose a DM4 file",
-    type=["dm4"]
+    type=["dm4", "dm3", "tif", "tiff"]
 )
 
 

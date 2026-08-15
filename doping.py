@@ -30,12 +30,11 @@ def extract_atoms_manual(image, edge_padding):
     #differentiates the tunsgten used z-score (standard deviation) test
     z_scores = (avg_intensities - np.mean(avg_intensities)) / np.std(avg_intensities)
     mask = np.abs(z_scores) > 3.0
-    tungs_blobs = blobs[mask]
+    blobs_w = blobs[mask]
     moly_blobs = blobs[~mask]
 
     #contamination -- runs a functions to remove neighboring 'tungstens' and reclassify as molybdenum
-    keep_w, reclass_mo =  reclassify_w_simple(tungs_blobs)
-  
+
     #returns array of blobs, each with x, y, and size sata
     #return moly_blobs, tungs_blobs
 

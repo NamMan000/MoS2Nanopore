@@ -3,3 +3,4 @@ hyperspy
 matplotlib
 numpy
 scikit-image
+scikit-optimize

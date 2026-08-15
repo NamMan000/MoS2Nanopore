@@ -28,4 +28,4 @@ def plot_atoms(moly_blobs, tungs_blobs, image, style = "dot"):  #input needs to 
             ax.add_patch(c)
          else:
             ax.plot(x, y, 'bo', markersize=0.25)  # blue dot at center of perceived W     
-    return fig
+    return fig, ax

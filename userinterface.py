@@ -105,7 +105,7 @@ if uploaded_file is not None:
             )
 
             # Generate doping plot
-            fig_doping = plot_atoms(
+            fig_doping, ax = plot_atoms(
                 moly_blobs,
                 tungs_blobs,
                 image_data

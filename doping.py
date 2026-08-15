@@ -15,6 +15,9 @@ def extract_atoms_manual(image, edge_padding):
     )
     blobs = blobs[inside_mask]
 
+    st.write("Number of atoms:", len(blobs))
+
+
     # transform the sigma number to radius
     blobs[:, 2] = blobs[:, 2] * np.sqrt(2)
     r = np.median(blobs[:,2])

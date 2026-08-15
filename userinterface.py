@@ -104,6 +104,9 @@ if uploaded_file is not None:
                 edge_padding=20
             )
 
+            st.write("Number of Mo atoms:", len(moly_blobs))
+            st.write("Number of W atoms:", len(tungs_blobs))
+
             # Generate doping plot
             fig_doping, ax = plot_atoms(
                 moly_blobs,

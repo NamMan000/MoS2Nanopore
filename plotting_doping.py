@@ -19,7 +19,7 @@ def plot_atoms(moly_blobs, tungs_blobs, image, style = "dot"):  #input needs to 
             c = Circle((x, y), r, color='red', linewidth=1.0, fill=False)
             ax.add_patch(c)
         else:
-            ax.plot(x, y, 'ro', markersize=2.5)  # red dot at center of perceived Mo
+            ax.plot(x, y, 'ro', markersize=0.5)  # red dot at center of perceived Mo
     
     
     for y, x, r in tungs_blobs:
@@ -27,5 +27,5 @@ def plot_atoms(moly_blobs, tungs_blobs, image, style = "dot"):  #input needs to 
             c = Circle((x, y), r, color='blue', linewidth=1.0, fill=False)
             ax.add_patch(c)
          else:
-            ax.plot(x, y, 'bo', markersize=2.5)  # blue dot at center of perceived W     
+            ax.plot(x, y, 'bo', markersize=0.5)  # blue dot at center of perceived W     
     return fig, ax

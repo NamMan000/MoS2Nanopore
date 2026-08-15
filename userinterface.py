@@ -91,26 +91,28 @@ if uploaded_file is not None:
     # 5. Tungsten Doping button
     # --------------------------------------------------
 
-    doping_but = st.button("Tungsten Doping")
+    
+    atoms_but = st.button("Bayesian Optimization for Atom ID")
 
+    from bayesian import extract_atoms_bayesian, auto_tune_image_parameters, evaluate_parameters, atom_fitness
+    if atoms_but:
 
-    if doping_but:
-
-        with st.spinner("Analyzing tungsten doping..."):
+        with st.spinner("Extracting atoms..."):
 
             # Run atom extraction
-            moly_blobs, tungs_blobs = extract_atoms_manual(
+            moly_blobs, r, string = extract_atoms_bayesian(
                 image_data,
                 edge_padding=10
             )
 
-            st.write("Number of Mo atoms:", len(moly_blobs))
-            st.write("Number of W atoms:", len(tungs_blobs))
+            st.write("Number of  atoms:", len(moly_blobs))
+            st.write("Parameters:", string)
 
+            
             # Generate doping plot
-            fig_doping, ax = plot_atoms(
+            fig_bayesian, ax = plot_atoms(
                 moly_blobs,
-                tungs_blobs,
+                None,
                 image_data
             )
 
@@ -119,6 +121,6 @@ if uploaded_file is not None:
         # 6. Display doping output
         # --------------------------------------------------
 
-        st.subheader("Tungsten Doping Analysis")
+        st.subheader("Bayesian Extraction Output")
 
-        st.pyplot(fig_doping)
+        st.pyplot(fig_bayesian)

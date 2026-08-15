@@ -41,7 +41,7 @@ def extract_atoms_manual(image, edge_padding):
 # identifiblobs_w, factor = 5.0):
     factor = 5.0 
     if len(blobs_w) == 0:
-        return np.empty((0,3)), np.empty((0,3))
+        return moly_blobs, np.empty((0,3))
     
     N = len(blobs_w)
     reclass_mask = np.zeros(N, dtype=bool)
@@ -68,4 +68,4 @@ def extract_atoms_manual(image, edge_padding):
     blobs_w = keep_w
 
     
-    return moly_blobs, tungs_blobs
+    return moly_blobs, blobs_w

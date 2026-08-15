@@ -101,7 +101,7 @@ if uploaded_file is not None:
             # Run atom extraction
             moly_blobs, tungs_blobs = extract_atoms_manual(
                 image_data,
-                edge_padding=20
+                edge_padding=10
             )
 
             st.write("Number of Mo atoms:", len(moly_blobs))

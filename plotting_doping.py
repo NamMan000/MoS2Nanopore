@@ -21,7 +21,7 @@ def plot_atoms(moly_blobs, tungs_blobs, image, style = "dot"):  #input needs to 
         else:
             ax.plot(x, y, 'ro', markersize=0.5)  # red dot at center of perceived Mo
     
-    if tungs_blobs not None: 
+    if tungs_blobs is not None: 
         for y, x, r in tungs_blobs:
             if style == "circle":
                 c = Circle((x, y), r, color='blue', linewidth=1.0, fill=False)

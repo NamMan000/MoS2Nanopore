@@ -13,6 +13,7 @@ from scipy.spatial import cKDTree
 import skopt
 from skopt import gp_minimize
 from skopt.space import Real, Integer
+from functools import partial
 
 
 def extract_atoms_bayesian(image, edge_padding):
@@ -45,9 +46,7 @@ def extract_atoms_bayesian(image, edge_padding):
 
 #Func #5 -- bayesian optimization
 def evaluate_parameters(params):
-  
-    global current_image_to_optimize
-    
+      
     # Unpack the parameters the ML is testing
     min_sigma, max_sigma, threshold, radius = params
     
@@ -174,18 +173,17 @@ def auto_tune_image_parameters(image):
         Real(10.0, 60.0, name='radius')
     ]
     
-    print("🤖 Machine Learning optimization loop started...")
     
     # gp_minimize uses Gaussian Processes (Machine Learning) to smartly guess parameters
     # n_calls=20 means it will try 20 different smart combinations before choosing the best
+   
     result = gp_minimize(
-        evaluate_parameters, 
-        search_space, 
-        n_calls=20, 
+        lambda params: evaluate_parameters(params, image),
+        search_space,
+        n_calls=20,
         random_state=42,
         verbose=False
     )
-    
     # Extract the winning parameters
     best_min_sigma, best_max_sigma, best_threshold, best_radius = result.x
     

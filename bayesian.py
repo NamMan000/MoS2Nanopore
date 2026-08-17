@@ -18,11 +18,9 @@ from functools import partial
 
 def extract_atoms_bayesian(image, edge_padding):
 
-    
     image = image.astype(np.float32)  
     image = filters.gaussian(image, sigma=2.5)
     image = (image - np.min(image)) / (np.max(image) - np.min(image))  # Scale to [0, 1]
-
 
     opt_min, opt_max, opt_thresh, opt_rad = auto_tune_image_parameters(image)
     blobs = blob_log(image, min_sigma=opt_min, max_sigma=opt_max, threshold=opt_thresh)
@@ -43,21 +41,13 @@ def extract_atoms_bayesian(image, edge_padding):
     #returns array of blobs, each with x, y, and size sata
     return moly_blobs, r, param_string
 
-
 #Func #5 -- bayesian optimization
 def evaluate_parameters(params):
-      
+  
+    
     # Unpack the parameters the ML is testing
     min_sigma, max_sigma, threshold, radius = params
     
-    print(
-    "TEST:",
-    type(min_sigma), min_sigma,
-    type(max_sigma), max_sigma,
-    type(threshold), threshold,
-    type(radius), radius
-    )
-
     # 1. Run your exact blob detection
     blobs = blob_log(
         image, 
@@ -77,22 +67,7 @@ def evaluate_parameters(params):
 
     penalty = atom_fitness(blobs, neighbors_list)
     
-    # # 3. THE ML 'FITNESS' METRIC: Evaluate if these parameters made a good network
-    # # We want a healthy network where atoms have, on average, 4 to 8 spatial neighbors.
-    # # If an atom has 0 neighbors (isolated) or 100 neighbors (over-connected), penalize it.
-    # neighbor_counts = [len(n) - 1 for n in neighbors_list] # Subtract 1 to exclude self
-    # avg_neighbors = np.mean(neighbor_counts)
-    
-    # # Calculate penalty: How far away is our network from an ideal average of 6 neighbors?
-    # ideal_neighbors = 6.0
-    # network_penalty = (avg_neighbors - ideal_neighbors) ** 2
-    
-    # # Also penalize if there are too many isolated atoms (islands)
-    # isolated_atoms = sum(1 for count in neighbor_counts if count == 0)
-    # isolation_penalty = isolated_atoms * 10
-    
-    # # Total score to minimize
-    # total_penalty = network_penalty + isolation_penalty
+ 
     return float(penalty)
 
 
@@ -170,7 +145,6 @@ def auto_tune_image_parameters(image):
     Runs a Bayesian Optimization ML loop to find the best parameters 
     uniquely tailored to the provided image.
     """
-    global current_image_to_optimize
     current_image_to_optimize = image
     
     # Define the search space boundaries for the ML to explore
@@ -184,14 +158,14 @@ def auto_tune_image_parameters(image):
     
     # gp_minimize uses Gaussian Processes (Machine Learning) to smartly guess parameters
     # n_calls=20 means it will try 20 different smart combinations before choosing the best
-   
     result = gp_minimize(
         lambda params: evaluate_parameters(params, image),
-        search_space,
-        n_calls=20,
+        search_space,        
+        n_calls=20, 
         random_state=42,
         verbose=False
     )
+    
     # Extract the winning parameters
     best_min_sigma, best_max_sigma, best_threshold, best_radius = result.x
     

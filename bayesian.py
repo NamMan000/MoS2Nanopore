@@ -42,7 +42,7 @@ def extract_atoms_bayesian(image, edge_padding):
     return moly_blobs, r, param_string
 
 #Func #5 -- bayesian optimization
-def evaluate_parameters(params):
+def evaluate_parameters(params, image):
   
     
     # Unpack the parameters the ML is testing
@@ -145,7 +145,7 @@ def auto_tune_image_parameters(image):
     Runs a Bayesian Optimization ML loop to find the best parameters 
     uniquely tailored to the provided image.
     """
-    current_image_to_optimize = image
+   
     
     # Define the search space boundaries for the ML to explore
     search_space = [

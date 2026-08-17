@@ -50,6 +50,14 @@ def evaluate_parameters(params):
     # Unpack the parameters the ML is testing
     min_sigma, max_sigma, threshold, radius = params
     
+    print(
+    "TEST:",
+    type(min_sigma), min_sigma,
+    type(max_sigma), max_sigma,
+    type(threshold), threshold,
+    type(radius), radius
+    )
+
     # 1. Run your exact blob detection
     blobs = blob_log(
         image, 
